@@ -1,5 +1,6 @@
 import React from 'react';
-import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
+import {Card,CardImg,CardText,CardBody,CardTitle,Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import {Link } from 'react-router-dom'
 
 function RenderCommentItem (props){
     const commentItem  = props.commentItem;
@@ -51,14 +52,38 @@ function RenderComments(props){
 
 function DishDetail(props) {
     console.log("DishDetail components render is invoked");
-    if(props.selectedDish){
+    if(props.dish){
 
-        let selectedDish = props.selectedDish;
+        let selectedDish = props.dish;
         return(
+            <div className="container">
+                <div className="row">
+                    
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to="/home">Home</Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>
+                            <Link to="/menu">Menu</Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>
+                            {props.dish.name}
+                        </BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>
+                            {props.dish.name}
+                        </h3>
+                        <hr/>
+                    </div>
+                </div>
+                
                 <div className='row'>
                     <RenderDish selectedDish = {selectedDish}/>
-                    <RenderComments comments = {selectedDish.comments} />
+                    <RenderComments comments = {props.comments} />
                 </div>
+
+            </div>
             )
          
     }

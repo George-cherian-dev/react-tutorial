@@ -42,9 +42,21 @@ class MainComponent extends Component {
             />
             );
         }
-        const ContactPage = () => {
+        const DishWithId = ({match}) => {
             return(
-                <Contact/>
+                <DishDetail 
+                dish={this.state.dishes
+                    .filter(
+                    (dish) => dish.id===parseInt(match.params.dishId,10)
+                    )[0]
+                }
+                
+                comments = {this.state.comments
+                    .filter(
+                    (comment) => comment.dishId===parseInt(match.params.dishId,10)
+                    )
+                }
+                />
             );
         }
           return (
@@ -53,8 +65,9 @@ class MainComponent extends Component {
                 <Header />
                 <Switch>
                     <Route path='/home' component = {HomePage} />
-                    <Route path='/contactus' component = {ContactPage} />
+                    <Route exact path='/contactus' component = {Contact} />
                     <Route exact path='/menu' component = {(dishes) =>   <Menu dishes={this.state.dishes}/>} />
+                    <Route path='/menu/:dishId' component = {DishWithId} />
                     <Redirect to='/home' />
                 </Switch>
                 <Footer />
