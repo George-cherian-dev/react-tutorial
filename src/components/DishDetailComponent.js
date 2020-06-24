@@ -3,9 +3,6 @@ import {Card,CardImg,CardText,CardBody,CardTitle} from 'reactstrap';
 
 
 class DishDetail extends Component{
-    constructor(props){
-        super(props);
-    }
     
 
     render(){ 
@@ -18,7 +15,7 @@ class DishDetail extends Component{
                     <div key={commentItem.id}>
                         <p >{commentItem.comment}</p>
                         <br></br>
-                        <p > -- {commentItem.author} , {commentItem.date}</p>
+                        <p > -- {commentItem.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentItem.date)))}</p>
                     </div>
                 );
             });
